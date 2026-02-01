@@ -1,7 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
-import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +8,6 @@ import { Subject } from 'rxjs';
 export class IdleService {
   private idleTimeOut = 15 * 60 * 1000; // 15 minutes in milliseconds
   private idleTimer: any = null;
-  private idle$ = new Subject<void>();
 
   constructor(
     private authService: AuthService,
