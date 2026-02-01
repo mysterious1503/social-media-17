@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService, AuthUser } from '../services/auth.service';
 import { UserService, UserProfile } from '../services/user.service';
+import { NgClass, UpperCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [NgClass, UpperCasePipe],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
