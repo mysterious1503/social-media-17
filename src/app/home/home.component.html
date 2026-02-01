@@ -8,75 +8,83 @@
 
   <div class="content">
     <!-- ADMIN VIEW: Show all users -->
-    <div *ngIf="isAdmin()" class="admin-section">
-      <h1>Admin Dashboard - All Users</h1>
-      
-      <div *ngIf="loading" class="loading">
-        Loading users...
+    @if (isAdmin()) {
+      <div class="admin-section">
+        <h1>Admin Dashboard - All Users</h1>
+        
+        @if (loading) {
+          <div class="loading">
+            Loading users...
+          </div>
+        } @else {
+          <div class="users-table-container">
+            <table class="users-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Title</th>
+                  <th>Role</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (user of allUsers; track user.id) {
+                  <tr>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.phone }}</td>
+                    <td>{{ user.title }}</td>
+                    <td>
+                      <span class="role-badge" [ngClass]="'role-' + user.role">
+                        {{ user.role | uppercase }}
+                      </span>
+                    </td>
+                  </tr>
+                } @empty {
+                  <tr>
+                    <td colspan="5" class="no-data">No users found.</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        }
       </div>
-
-      <div *ngIf="!loading && allUsers.length > 0" class="users-table-container">
-        <table class="users-table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Phone</th>
-              <th>Title</th>
-              <th>Role</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let user of allUsers">
-              <td>{{ user.name }}</td>
-              <td>{{ user.email }}</td>
-              <td>{{ user.phone }}</td>
-              <td>{{ user.title }}</td>
-              <td>
-                <span class="role-badge" [ngClass]="'role-' + user.role">
-                  {{ user.role | uppercase }}
-                </span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div *ngIf="!loading && allUsers.length === 0" class="no-data">
-        No users found.
-      </div>
-    </div>
+    }
 
     <!-- USER VIEW: Show only current user details -->
-    <div *ngIf="!isAdmin()" class="user-section">
-      <h1>Home - My Profile</h1>
-      
-      <div class="profile-card">
-        <div class="profile-header">
-          <h2>{{ currentUser?.name }}</h2>
-          <span class="role-badge role-user">{{ currentUser?.role | uppercase }}</span>
-        </div>
+    @if (!isAdmin()) {
+      <div class="user-section">
+        <h1>Home - My Profile</h1>
+        
+        <div class="profile-card">
+          <div class="profile-header">
+            <h2>{{ currentUser?.name }}</h2>
+            <span class="role-badge role-user">{{ currentUser?.role | uppercase }}</span>
+          </div>
 
-        <div class="profile-details">
-          <div class="detail-row">
-            <span class="label">Email:</span>
-            <span class="value">{{ currentUser?.email }}</span>
-          </div>
-          <div class="detail-row">
-            <span class="label">Phone:</span>
-            <span class="value">{{ currentUser?.phone }}</span>
-          </div>
-          <div class="detail-row">
-            <span class="label">Title:</span>
-            <span class="value">{{ currentUser?.title }}</span>
-          </div>
-          <div class="detail-row">
-            <span class="label">Account Type:</span>
-            <span class="value">{{ currentUser?.role | uppercase }}</span>
+          <div class="profile-details">
+            <div class="detail-row">
+              <span class="label">Email:</span>
+              <span class="value">{{ currentUser?.email }}</span>
+            </div>
+            <div class="detail-row">
+              <span class="label">Phone:</span>
+              <span class="value">{{ currentUser?.phone }}</span>
+            </div>
+            <div class="detail-row">
+              <span class="label">Title:</span>
+              <span class="value">{{ currentUser?.title }}</span>
+            </div>
+            <div class="detail-row">
+              <span class="label">Account Type:</span>
+              <span class="value">{{ currentUser?.role | uppercase }}</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    }
   </div>
 </div>
 
