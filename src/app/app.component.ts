@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { IdleService } from './services/idle.service';
@@ -13,10 +13,8 @@ import { IdleService } from './services/idle.service';
 export class AppComponent implements OnInit, OnDestroy {
   title = 'social-media-17';
 
-  constructor(
-    private idleService: IdleService,
-    private authService: AuthService,
-  ) {}
+  private idleService = inject(IdleService);
+  private authService = inject(AuthService);
 
   ngOnInit(): void {
     // Start idle detection only if user is authenticated

@@ -1,4 +1,4 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable, NgZone, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
 
@@ -8,12 +8,9 @@ import { AuthService } from './auth.service';
 export class IdleService {
   private idleTimeOut = 15 * 60 * 1000; // 15 minutes in milliseconds
   private idleTimer: any = null;
-
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-    private ngZone: NgZone,
-  ) {}
+  private authService = inject(AuthService);
+  private router = inject(Router);
+  private ngZone = inject(NgZone);
 
   startWatching(): void {
     // Run outside Angular zone for better performance

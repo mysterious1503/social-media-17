@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService, AuthUser } from '../services/auth.service';
 import { UserService, UserProfile } from '../services/user.service';
@@ -15,12 +15,9 @@ export class HomeComponent implements OnInit {
   currentUser: AuthUser | null = null;
   allUsers: UserProfile[] = [];
   loading: boolean = true;
-
-  constructor(
-    private authService: AuthService,
-    private userService: UserService,
-    private router: Router,
-  ) {}
+  private authService = inject(AuthService);
+  private userService = inject(UserService);
+  private router = inject(Router);
 
   ngOnInit() {
     this.currentUser = this.authService.getCurrentUser();
