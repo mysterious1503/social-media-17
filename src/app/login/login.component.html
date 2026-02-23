@@ -16,7 +16,6 @@
           id="email"
           formControlName="email"
           placeholder="Enter your email"
-          [disabled]="loading"
         />
         @if (loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched) {
           <span class="error-text">Email is required</span>
@@ -33,7 +32,6 @@
           id="password"
           formControlName="password"
           placeholder="Enter your password"
-          [disabled]="loading"
         />
         @if (loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched) {
           <span class="error-text">Password is required</span>

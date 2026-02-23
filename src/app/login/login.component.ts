@@ -40,9 +40,13 @@ export class LoginComponent {
     this.loading = true;
     this.error = '';
 
+    // Disable form controls
+    this.loginForm.disable();
+
     const { email, password } = this.loginForm.value;
     this.authService.login(email, password).subscribe((success) => {
       this.loading = false;
+      this.loginForm.enable();
       if (success) {
         this.router.navigate(['/home']);
       } else {

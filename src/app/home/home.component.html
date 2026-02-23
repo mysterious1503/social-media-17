@@ -1,7 +1,13 @@
 <div class="home-container">
   <div class="navbar">
     <div class="navbar-content">
-      <h2>Welcome, {{ currentUser?.name }}</h2>
+      <div class="navbar-left">
+        <h2>Welcome, {{ currentUser?.name }}</h2>
+        <div class="nav-links">
+          <a routerLink="/home" class="nav-link active">Home</a>
+          <a routerLink="/posts" class="nav-link">Posts</a>
+        </div>
+      </div>
       <button (click)="logout()" class="logout-btn">Logout</button>
     </div>
   </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService, AuthUser } from '../services/auth.service';
 import { UserService, UserProfile } from '../services/user.service';
 import { NgClass, UpperCasePipe } from '@angular/common';
@@ -7,7 +7,7 @@ import { NgClass, UpperCasePipe } from '@angular/common';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgClass, UpperCasePipe],
+  imports: [NgClass, UpperCasePipe, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })

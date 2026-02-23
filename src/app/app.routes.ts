@@ -14,6 +14,12 @@ export const routes: Routes = [
       import('./home/home.component').then((m) => m.HomeComponent),
     canActivate: [authGuard],
   },
+  {
+    path: 'posts',
+    loadComponent: () =>
+      import('./posts/posts.component').then((m) => m.PostsComponent),
+    canActivate: [authGuard],
+  },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];
