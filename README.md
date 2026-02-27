@@ -200,6 +200,64 @@ Hello Mohita
 
 **Configuration**: The web component script is included in `angular.json` under the `scripts` array so it's loaded globally.
 
+#### demo.js - JavaScript as TypeScript Example
+
+- **Location**: `src/app/home/demo.js`
+- **Purpose**: Demonstrates how to use JavaScript files with TypeScript-like type checking
+- **Method**: Uses JSDoc comments with `@ts-check` directive for type safety
+- **How it works**:
+  - `@ts-check` directive at the top enables TypeScript checking in VS Code
+  - JSDoc `@param` and `@returns` annotations provide type information
+  - VS Code highlights type mismatches in red (e.g., passing string instead of number)
+  - No build step needed - works directly as JavaScript
+
+**Example**:
+
+```javascript
+// @ts-check
+
+/**
+ * @param {string} name
+ * @param {number} age
+ * @returns {string}
+ */
+function greet(name, age) {
+  return `Hello ${name}, you are ${age} years old.`;
+}
+
+greet("Alice", 43); // ✅ Correct
+greet("Alice", "34"); // ❌ Type error - string instead of number
+```
+
+#### demo2.js - Manual Type Checking Example
+
+- **Location**: `src/app/home/demo2.js`
+- **Purpose**: Shows manual runtime type checking in JavaScript
+- **How it works**:
+  - Uses `typeof` operator to validate input types at runtime
+  - Throws errors when types don't match expectations
+  - Useful for functions that interact with external data
+  - Complements TypeScript's compile-time checking
+
+**Example**:
+
+```javascript
+function deposit(amount) {
+  if (typeof amount !== "number") {
+    throw new Error("Amount must be a number!");
+  }
+  // Process deposit...
+}
+
+deposit(100); // ✅ Works fine
+deposit("100"); // ❌ Throws error at runtime
+```
+
+**Key Differences**:
+
+- **demo.js**: Static type checking with JSDoc and `@ts-check` (compile-time in IDE)
+- **demo2.js**: Dynamic type checking with runtime validation (catches errors at execution)
+
 ### Angular Features
 
 - **Standalone Components**: All components are standalone (no NgModule required)
@@ -207,6 +265,7 @@ Hello Mohita
 - **Routing**: Protected routes with auth guard
 - **Dependency Injection**: Services for auth, users, and posts
 - **Custom Web Components**: Native web components integrated with Angular
+- **JavaScript Type Safety**: Multiple approaches to add type checking without full TypeScript compilation
 
 ### Apollo Angular
 
@@ -280,7 +339,6 @@ Tests will execute via Karma and watch for file changes.
 - User data is stored in `db.js` and served through GraphQL
 - Posts data is also in `db.js` and managed through GraphQL mutations
 - All changes to posts are persisted in the GraphQL server's cache
-- The `db.json` file (if present) is not used and can be safely deleted
 
 ## 🔍 Troubleshooting
 
@@ -302,11 +360,3 @@ Tests will execute via Karma and watch for file changes.
 - [Apollo Angular Documentation](https://apollo-angular.com/)
 - [json-graphql-server GitHub](https://github.com/marmelab/json-graphql-server)
 - [GraphQL Documentation](https://graphql.org/)
-
-## 🤝 Contributing
-
-Feel free to fork and submit pull requests for improvements.
-
-## 📄 License
-
-This project is licensed under the MIT License.
