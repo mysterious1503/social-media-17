@@ -1,4 +1,9 @@
-import { Component, OnInit, inject } from '@angular/core';
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService, AuthUser } from '../services/auth.service';
 import { UserService, UserProfile } from '../services/user.service';
@@ -10,8 +15,10 @@ import { NgClass, UpperCasePipe } from '@angular/common';
   imports: [NgClass, UpperCasePipe, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomeComponent implements OnInit {
+  userName = 'Mohita';
   currentUser: AuthUser | null = null;
   allUsers: UserProfile[] = [];
   loading: boolean = true;
