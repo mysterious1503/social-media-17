@@ -7,7 +7,6 @@ A modern social media application built with Angular 17, featuring user authenti
 - **User Authentication**: Login and signup with role-based access control
 - **Admin Dashboard**: View all users with detailed information
 - **GraphQL API**: Full CRUD operations for posts using Apollo Client
-- **Responsive Design**: Mobile-friendly UI with modern styling
 - **Real-time Navigation**: Dynamic routing between pages
 
 ## 📋 Prerequisites
