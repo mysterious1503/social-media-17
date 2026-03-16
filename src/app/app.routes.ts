@@ -10,15 +10,23 @@ export const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   {
     path: 'home',
-    loadComponent: () =>
-      import('./home/home.component').then((m) => m.HomeComponent),
+    component: HomeComponent, // This acts as our Layout/Shell
     canActivate: [authGuard],
-  },
-  {
-    path: 'posts',
-    loadComponent: () =>
-      import('./posts/posts.component').then((m) => m.PostsComponent),
-    canActivate: [authGuard],
+    children: [
+      {
+        path: 'org-info',
+        loadComponent: () =>
+          import('./org-info/org-info.component').then(
+            (m) => m.OrgInfoComponent,
+          ),
+      },
+      {
+        path: 'posts',
+        loadComponent: () =>
+          import('./posts/posts.component').then((m) => m.PostsComponent),
+      },
+      { path: '', redirectTo: 'org-info', pathMatch: 'full' }, // Default child
+    ],
   },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },

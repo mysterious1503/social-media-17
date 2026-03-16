@@ -4,15 +4,16 @@ import {
   OnInit,
   inject,
 } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import { AuthService, AuthUser } from '../services/auth.service';
 import { UserService, UserProfile } from '../services/user.service';
 import { NgClass, UpperCasePipe } from '@angular/common';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgClass, UpperCasePipe, RouterLink],
+  imports: [RouterLink, MatTabsModule, RouterModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -25,6 +26,11 @@ export class HomeComponent implements OnInit {
   private authService = inject(AuthService);
   private userService = inject(UserService);
   private router = inject(Router);
+
+  navLinks = [
+    { label: 'Home', path: 'org-info' }, // Relative path to child
+    { label: 'Posts', path: 'posts' },
+  ];
 
   ngOnInit() {
     this.currentUser = this.authService.getCurrentUser();
@@ -46,10 +52,6 @@ export class HomeComponent implements OnInit {
       this.allUsers = users;
       this.loading = false;
     });
-  }
-
-  isAdmin(): boolean {
-    return this.currentUser?.role === 'admin';
   }
 
   logout() {
