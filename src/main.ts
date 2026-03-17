@@ -1,12 +1,10 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
-import { AllEnterpriseModule, ModuleRegistry } from 'ag-grid-enterprise';
-import { AgChartsEnterpriseModule } from 'ag-charts-enterprise';
+import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 
-ModuleRegistry.registerModules([
-  AllEnterpriseModule.with(AgChartsEnterpriseModule),
-]);
+// Register all Community features
+ModuleRegistry.registerModules([AllCommunityModule]);
 
 bootstrapApplication(AppComponent, appConfig).catch((err) =>
   console.error(err),

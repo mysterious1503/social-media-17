@@ -2,11 +2,12 @@ import { Component, OnInit, inject } from '@angular/core';
 import { AuthService, AuthUser } from '../services/auth.service';
 import { UserService, UserProfile } from '../services/user.service';
 import { NgClass, UpperCasePipe } from '@angular/common';
+import { OrgAgGridTableComponent } from '../org-ag-grid-table/org-ag-grid-table.component';
 
 @Component({
   selector: 'app-org-info',
   standalone: true,
-  imports: [NgClass, UpperCasePipe],
+  imports: [NgClass, UpperCasePipe, OrgAgGridTableComponent],
   templateUrl: './org-info.component.html',
   styleUrl: './org-info.component.scss',
 })
