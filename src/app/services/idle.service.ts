@@ -6,16 +6,14 @@ import { AuthService } from './auth.service';
   providedIn: 'root',
 })
 export class IdleService {
-  private idleTimeOut = 15 * 60 * 1000; // 15 minutes in milliseconds
+  private idleTimeOut = 15 * 60 * 1000;
   private idleTimer: any = null;
   private authService = inject(AuthService);
   private router = inject(Router);
   private ngZone = inject(NgZone);
 
   startWatching(): void {
-    // Run outside Angular zone for better performance
     this.ngZone.runOutsideAngular(() => {
-      // Listen to user activity events
       document.addEventListener('mousemove', () => this.resetTimer());
       document.addEventListener('keydown', () => this.resetTimer());
       document.addEventListener('click', () => this.resetTimer());
@@ -23,17 +21,14 @@ export class IdleService {
       document.addEventListener('touchstart', () => this.resetTimer());
     });
 
-    // Start the initial timer
     this.resetTimer();
   }
 
   private resetTimer(): void {
-    // Clear existing timer
     if (this.idleTimer) {
       clearTimeout(this.idleTimer);
     }
 
-    // Set a new timer
     this.idleTimer = setTimeout(() => {
       this.ngZone.run(() => {
         this.logout();
